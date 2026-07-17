@@ -12,13 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // productsData.products is an array containing an object with dynamic keys
         const productsDict = productsData.products[0];
 
+        const categoriesMap = new Map();
+        categories.forEach(c => categoriesMap.set(c.id, c));
+
+        const typesMap = new Map();
+        types.forEach(t => typesMap.set(t.id, t));
+
         for (const key in productsDict) {
             if (productsDict.hasOwnProperty(key)) {
                 const product = productsDict[key];
 
                 // Find matching type and category
-                const type = types.find(t => t.id === product.type);
-                const category = type ? categories.find(c => c.id === type.category) : null;
+                const type = typesMap.get(product.type);
+                const category = type ? categoriesMap.get(type.category) : null;
 
                 const card = document.createElement('div');
                 card.className = 'card';
