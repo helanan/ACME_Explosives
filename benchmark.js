@@ -23,12 +23,19 @@ for (let i = 0; i < 10000; i++) {
 function runBaseline() {
     const start = process.hrtime.bigint();
 
+    // Convert to dictionaries/maps
+    const categoryMap = new Map();
+    for (const c of categories) categoryMap.set(c.id, c);
+
+    const typeMap = new Map();
+    for (const t of types) typeMap.set(t.id, t);
+
     let count = 0;
     for (const key in productsDict) {
         if (productsDict.hasOwnProperty(key)) {
             const product = productsDict[key];
-            const type = types.find(t => t.id === product.type);
-            const category = type ? categories.find(c => c.id === type.category) : null;
+            const type = typeMap.get(product.type);
+            const category = type ? categoryMap.get(type.category) : null;
             if (type && category) count++;
         }
     }
