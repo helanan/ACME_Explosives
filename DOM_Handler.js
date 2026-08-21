@@ -18,39 +18,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const typesMap = new Map();
         types.forEach(t => typesMap.set(t.id, t));
 
-        for (const key in productsDict) {
-            if (productsDict.hasOwnProperty(key)) {
-                const product = productsDict[key];
+        for (const product of Object.values(productsDict)) {
 
-                // Find matching type and category
-                const type = typesMap.get(product.type);
-                const category = type ? categoriesMap.get(type.category) : null;
+            // Find matching type and category
+            const type = typesMap.get(product.type);
+            const category = type ? categoriesMap.get(type.category) : null;
 
-                const card = document.createElement('div');
-                card.className = 'card';
+            const card = document.createElement('div');
+            card.className = 'card';
 
-                const nameEl = document.createElement('h3');
-                nameEl.textContent = product.name;
+            const nameEl = document.createElement('h3');
+            nameEl.textContent = product.name;
 
-                const descEl = document.createElement('p');
-                descEl.className = 'description';
-                descEl.textContent = product.description;
+            const descEl = document.createElement('p');
+            descEl.className = 'description';
+            descEl.textContent = product.description;
 
-                const typeEl = document.createElement('p');
-                typeEl.className = 'type';
-                typeEl.innerHTML = `<strong>Type:</strong> ${type ? type.name : 'Unknown'}`;
+            const typeEl = document.createElement('p');
+            typeEl.className = 'type';
+            typeEl.innerHTML = `<strong>Type:</strong> ${type ? type.name : 'Unknown'}`;
 
-                const categoryEl = document.createElement('p');
-                categoryEl.className = 'category';
-                categoryEl.innerHTML = `<strong>Category:</strong> ${category ? category.name : 'Unknown'}`;
+            const categoryEl = document.createElement('p');
+            categoryEl.className = 'category';
+            categoryEl.innerHTML = `<strong>Category:</strong> ${category ? category.name : 'Unknown'}`;
 
-                card.appendChild(nameEl);
-                card.appendChild(typeEl);
-                card.appendChild(categoryEl);
-                card.appendChild(descEl);
+            card.appendChild(nameEl);
+            card.appendChild(typeEl);
+            card.appendChild(categoryEl);
+            card.appendChild(descEl);
 
-                container.appendChild(card);
-            }
+            container.appendChild(card);
         }
     })
     .catch(error => {
