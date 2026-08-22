@@ -68,19 +68,26 @@ function runOptimized() {
     return Number(end - start) / 1000000; // ms
 }
 
-// Warm up
-runBaseline();
-runOptimized();
+if (require.main === module) {
+    // Warm up
+    runBaseline();
+    runOptimized();
 
-let baselineTotal = 0;
-let optimizedTotal = 0;
-const iterations = 100;
+    let baselineTotal = 0;
+    let optimizedTotal = 0;
+    const iterations = 100;
 
-for (let i = 0; i < iterations; i++) {
-    baselineTotal += runBaseline();
-    optimizedTotal += runOptimized();
+    for (let i = 0; i < iterations; i++) {
+        baselineTotal += runBaseline();
+        optimizedTotal += runOptimized();
+    }
+
+    console.log(`Baseline avg: ${baselineTotal / iterations} ms`);
+    console.log(`Optimized avg: ${optimizedTotal / iterations} ms`);
+    console.log(`Speedup: ${((baselineTotal / iterations) / (optimizedTotal / iterations)).toFixed(2)}x`);
 }
 
-console.log(`Baseline avg: ${baselineTotal / iterations} ms`);
-console.log(`Optimized avg: ${optimizedTotal / iterations} ms`);
-console.log(`Speedup: ${((baselineTotal / iterations) / (optimizedTotal / iterations)).toFixed(2)}x`);
+module.exports = {
+    runBaseline,
+    runOptimized
+};
