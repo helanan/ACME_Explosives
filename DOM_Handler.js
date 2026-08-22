@@ -40,11 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const typeEl = document.createElement('p');
                 typeEl.className = 'type';
-                typeEl.innerHTML = `<strong>Type:</strong> ${type ? type.name : 'Unknown'}`;
+                const typeStrong = document.createElement('strong');
+                typeStrong.textContent = 'Type:';
+                typeEl.appendChild(typeStrong);
+                typeEl.appendChild(document.createTextNode(` ${type ? type.name : 'Unknown'}`));
 
                 const categoryEl = document.createElement('p');
                 categoryEl.className = 'category';
-                categoryEl.innerHTML = `<strong>Category:</strong> ${category ? category.name : 'Unknown'}`;
+                const categoryStrong = document.createElement('strong');
+                categoryStrong.textContent = 'Category:';
+                categoryEl.appendChild(categoryStrong);
+                categoryEl.appendChild(document.createTextNode(` ${category ? category.name : 'Unknown'}`));
 
                 card.appendChild(nameEl);
                 card.appendChild(typeEl);
