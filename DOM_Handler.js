@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const typesMap = new Map();
         types.forEach(t => typesMap.set(t.id, t));
 
+        const fragment = document.createDocumentFragment();
+
         for (const key in productsDict) {
             if (productsDict.hasOwnProperty(key)) {
                 const product = productsDict[key];
@@ -49,9 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.appendChild(categoryEl);
                 card.appendChild(descEl);
 
-                container.appendChild(card);
+                fragment.appendChild(card);
             }
         }
+
+        container.appendChild(fragment);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
