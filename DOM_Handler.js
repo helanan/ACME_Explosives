@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
         console.error('Error fetching data:', error);
-        container.innerHTML = '<p>Error loading products.</p>';
+
+        const errorEl = document.createElement('p');
+        errorEl.textContent = 'Error loading products.';
+
+        container.innerHTML = ''; // Clear previous content if any securely
+        container.appendChild(errorEl);
     });
 });
