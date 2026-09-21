@@ -44,22 +44,21 @@ function runBaseline() {
     return Number(end - start) / 1000000; // ms
 }
 
+const optimizedCategoryMap = new Map();
+for (const c of categories) optimizedCategoryMap.set(c.id, c);
+
+const optimizedTypeMap = new Map();
+for (const t of types) optimizedTypeMap.set(t.id, t);
+
 function runOptimized() {
     const start = process.hrtime.bigint();
-
-    // Convert to dictionaries/maps
-    const categoryMap = new Map();
-    for (const c of categories) categoryMap.set(c.id, c);
-
-    const typeMap = new Map();
-    for (const t of types) typeMap.set(t.id, t);
 
     let count = 0;
     for (const key in productsDict) {
         if (productsDict.hasOwnProperty(key)) {
             const product = productsDict[key];
-            const type = typeMap.get(product.type);
-            const category = type ? categoryMap.get(type.category) : null;
+            const type = optimizedTypeMap.get(product.type);
+            const category = type ? optimizedCategoryMap.get(type.category) : null;
             if (type && category) count++;
         }
     }
