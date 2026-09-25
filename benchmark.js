@@ -32,7 +32,7 @@ function runBaseline() {
 
     let count = 0;
     for (const key in productsDict) {
-        if (productsDict.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(productsDict, key)) {
             const product = productsDict[key];
             const type = typeMap.get(product.type);
             const category = type ? categoryMap.get(type.category) : null;
@@ -55,7 +55,7 @@ function runOptimized() {
 
     let count = 0;
     for (const key in productsDict) {
-        if (productsDict.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(productsDict, key)) {
             const product = productsDict[key];
             const type = optimizedTypeMap.get(product.type);
             const category = type ? optimizedCategoryMap.get(type.category) : null;
