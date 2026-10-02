@@ -20,15 +20,15 @@ for (let i = 0; i < 10000; i++) {
     productsDict[`product_${i}`] = {id: i, type: i % 1000, name: `Product ${i}`, description: `Desc ${i}`};
 }
 
+// Convert to dictionaries/maps
+const categoryMap = new Map();
+for (const c of categories) categoryMap.set(c.id, c);
+
+const typeMap = new Map();
+for (const t of types) typeMap.set(t.id, t);
+
 function runBaseline() {
     const start = process.hrtime.bigint();
-
-    // Convert to dictionaries/maps
-    const categoryMap = new Map();
-    for (const c of categories) categoryMap.set(c.id, c);
-
-    const typeMap = new Map();
-    for (const t of types) typeMap.set(t.id, t);
 
     let count = 0;
     for (const key in productsDict) {
