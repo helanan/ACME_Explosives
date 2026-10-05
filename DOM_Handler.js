@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fragment = document.createDocumentFragment();
 
         for (const key in productsDict) {
-            if (productsDict.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(productsDict, key)) {
                 const product = productsDict[key];
 
                 // Find matching type and category
