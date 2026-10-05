@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const errorEl = document.createElement('p');
         errorEl.textContent = 'Error loading products.';
 
-        container.innerHTML = ''; // Clear previous content if any securely
+        container.textContent = ''; // Clear previous content if any securely
         container.appendChild(errorEl);
     });
 });
