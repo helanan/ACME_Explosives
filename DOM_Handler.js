@@ -20,45 +20,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const fragment = document.createDocumentFragment();
 
-        for (const key in productsDict) {
-            if (Object.prototype.hasOwnProperty.call(productsDict, key)) {
-                const product = productsDict[key];
+        for (const key of Object.keys(productsDict)) {
+            const product = productsDict[key];
 
-                // Find matching type and category
-                const type = typesMap.get(product.type);
-                const category = type ? categoriesMap.get(type.category) : null;
+            // Find matching type and category
+            const type = typesMap.get(product.type);
+            const category = type ? categoriesMap.get(type.category) : null;
 
-                const card = document.createElement('div');
-                card.className = 'card';
+            const card = document.createElement('div');
+            card.className = 'card';
 
-                const nameEl = document.createElement('h3');
-                nameEl.textContent = product.name;
+            const nameEl = document.createElement('h3');
+            nameEl.textContent = product.name;
 
-                const descEl = document.createElement('p');
-                descEl.className = 'description';
-                descEl.textContent = product.description;
+            const descEl = document.createElement('p');
+            descEl.className = 'description';
+            descEl.textContent = product.description;
 
-                const typeEl = document.createElement('p');
-                typeEl.className = 'type';
-                const typeStrong = document.createElement('strong');
-                typeStrong.textContent = 'Type:';
-                typeEl.appendChild(typeStrong);
-                typeEl.appendChild(document.createTextNode(` ${type ? type.name : 'Unknown'}`));
+            const typeEl = document.createElement('p');
+            typeEl.className = 'type';
+            const typeStrong = document.createElement('strong');
+            typeStrong.textContent = 'Type:';
+            typeEl.appendChild(typeStrong);
+            typeEl.appendChild(document.createTextNode(` ${type ? type.name : 'Unknown'}`));
 
-                const categoryEl = document.createElement('p');
-                categoryEl.className = 'category';
-                const categoryStrong = document.createElement('strong');
-                categoryStrong.textContent = 'Category:';
-                categoryEl.appendChild(categoryStrong);
-                categoryEl.appendChild(document.createTextNode(` ${category ? category.name : 'Unknown'}`));
+            const categoryEl = document.createElement('p');
+            categoryEl.className = 'category';
+            const categoryStrong = document.createElement('strong');
+            categoryStrong.textContent = 'Category:';
+            categoryEl.appendChild(categoryStrong);
+            categoryEl.appendChild(document.createTextNode(` ${category ? category.name : 'Unknown'}`));
 
-                card.appendChild(nameEl);
-                card.appendChild(typeEl);
-                card.appendChild(categoryEl);
-                card.appendChild(descEl);
+            card.appendChild(nameEl);
+            card.appendChild(typeEl);
+            card.appendChild(categoryEl);
+            card.appendChild(descEl);
 
-                fragment.appendChild(card);
-            }
+            fragment.appendChild(card);
         }
 
         container.appendChild(fragment);
