@@ -54,13 +54,11 @@ function runOptimized() {
     const start = process.hrtime.bigint();
 
     let count = 0;
-    for (const key in productsDict) {
-        if (Object.prototype.hasOwnProperty.call(productsDict, key)) {
-            const product = productsDict[key];
-            const type = optimizedTypeMap.get(product.type);
-            const category = type ? optimizedCategoryMap.get(type.category) : null;
-            if (type && category) count++;
-        }
+    for (const key of Object.keys(productsDict)) {
+        const product = productsDict[key];
+        const type = optimizedTypeMap.get(product.type);
+        const category = type ? optimizedCategoryMap.get(type.category) : null;
+        if (type && category) count++;
     }
 
     const end = process.hrtime.bigint();
